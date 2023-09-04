@@ -20,6 +20,15 @@ var users = [
         ]
     },
     {
+        cpf: '109.025.719-82',
+        name: 'thiago martins',
+        status: 'regular',
+        account: [
+            { accountNumber: '132744-7' },
+            { accountNumber: '998244-4' },
+        ]
+    },
+    {
         cpf: '767.770.350-01',
         name: 'joão alcionei',
         status: 'irregular',
@@ -70,9 +79,9 @@ app.post('/account/duplicate/:cpf', (req, res) => {
 
     let indexUsers = users.findIndex((user) => user.cpf === cpf);
 
-    if (indexUsers) {
+    if (indexUsers !== -1) {
         users[indexUsers].account.push(account);
-        res.json({ success: true });
+        res.json({ user: users[indexUsers] });
     } else {
         res.json({ success: false });
     }
